@@ -1,0 +1,116 @@
+% ################################################################ LET'S DANCE #
+
+% Keepin' it minimal
+\documentclass{minimal}
+\def\size#1{\fontsize{#1bp}{0bp}\selectfont}
+\def\normalsize{\size{34}}
+\def\small{\size{21}}
+\def\tiny{\size{13}}
+\def\it{\fontshape{it}\selectfont}
+
+% Set up fonts
+\usepackage{fontspec}
+\setmainfont{AGaramond LT}
+\newfontface\Zreg{LTZapfino Three}
+\newfontface\Zlig{LTZapfino Ligature}
+\newfontface\Zorn{LTZapfino Ornaments}
+% Calligraphic font sizes
+\def\Zbig{\size{236}\Zreg}
+\def\Zmed{\size{136}\Zreg}
+% Standard ligatures
+\def\ll{{\Zlig l}} \def\ou{{\Zlig o}} \def\ss{{\Zlig S}}
+\def\es{{\Zlig e}} \def\ri{{\Zlig R}} \def\eS{{\Zlig E}}
+\def\is{{\Zlig i}} \def\st{{\Zlig U}} \def\pp{{\Zlig p}}
+% Custom swashes
+\def\L{\llap{\raise-.33em\hbox{\rotatebox[origin=br]{20}
+  {\fontsize{1.1em}{0em}\selectfont\Zorn U}}\kern-.342em}{L}}
+\def\ph{{\Zlig h}\rlap{\kern-0.74em\raise.27em\hbox{\rotatebox[origin=br]{90}
+  {\fontsize{1.5em}{0em}\selectfont\Zorn Q}}}}
+\def\p{\llap{\raise-.13em\hbox{\reflectbox{\rotatebox[origin=br]{185}
+  {\Zorn R}}}\kern.12em}{p}}
+
+% Ensure a clean fit on the page
+\usepackage[a4paper,total={7in,9in},vmarginratio=3:1]{geometry}
+
+% Graphics library
+\usepackage{pstricks}
+% Helper rule
+%\def\pshrule(#1){\qline(-500,#1)(500,#1)}
+
+% Victorian ornaments
+\usepackage{psvectorian}
+% There is whitespace somewhere in the \psvectorian. Ugly fix:
+\def\psvect(#1)[#2]#3%
+  {{\fontsize{1sp}{0sp}\selectfont\psvectorian[width=#1bp,#2]{#3}}}
+
+% For some scaling and rotations
+\usepackage{graphicx}
+
+% Ticket drawing command
+\def\drawticket{\scalebox{0.32}{
+\psset{xunit=1bp,yunit=1bp}
+\begin{pspicture}(-551,-669)(551,1051)
+\psset{linestyle=dotted,linewidth=1bp}
+\psframe(-534,-652)(534,1034)
+\psline(-534,-270)(534,-270)
+\psset{linestyle=solid,linewidth=2bp}
+\psframe(-517,-253)(517,1017)
+\psframe(-517,-287)(517,-635)
+%\psframe(-500,-236)(500,1000)
+%\psframe(-534,-270)(534,1034)
+%\psframe(-500,-304)(500,-618)
+%\psframe(-534,-270)(534,-652)
+%\psgrid[unit=250bp](-2,0)(2,4)
+%\pshrule(798)\pshrule(875)
+%\pshrule(618)
+%\pshrule(472)
+%\pshrule(326)\pshrule(347)
+%\pshrule(180)\pshrule(201)\pshrule(222)
+%\pshrule(-34)\pshrule(-111)
+\rput[tl](-500,1000){\psvect(202)[]{41}}
+\rput[tr]( 500,1000){\psvect(202)[mirror]{41}}
+\rput[b] (   0, 860){\psvect(750)[]{45}}
+\rput[B] (   0, 798){\it billet pour une}
+\rput[B] (  10, 618){\Zbig S{\es}sion}
+\rput[B] ( -10, 472){\Zbig d'éc{\ou}te {\p}{\ri}vée}
+\rput[Br]( 260, 347){\Zmed \article}
+\rput[B] (   0, 222){\Zmed \titre}
+\rput[B] (   0, -12){\it au manoir \manoir}
+\rput[B] (   0, -56){\it à la date convenue}
+\rput[t] (   0, -95){\psvect(202)[]{49}}
+\rput[bl](-500,-236){\psvect(202)[flip]{41}}
+\rput[br]( 500,-236){\psvect(202)[flip,mirror]{41}}
+\rput[tl](-500,-304){\psvect(34)[]{31}}
+\rput[tr]( 500,-304){\psvect(34)[mirror]{31}}
+\rput[tl](-466,-338){\psvect(202)[]{104}}
+\rput[tr]( 466,-353){\psvect(236)[mirror]{158}}
+\rput[tl]( 130,-320){\psvect(80)[flip]{47}}
+\rput[tr](-130,-320){\psvect(80)[flip]{48}}
+\rput[B] (   0,-340){\it coupoun pour une}
+\rput[B] (   0,-392){Session d'écoute privée}
+\rput[B] (   0,-436){\simpletitre}
+\rput[B] (   0,-480){au manoir \manoir}
+\rput[B] (   0,-580){\it\small date ci-dessus}
+\rput[b] (-250,-593){\psvect(382)[]{85}}
+\rput[b] ( 250,-593){\psvect(382)[]{85}}
+\rput[B] (   0,-610){\it\small à signer par les parties}
+\rput[bl](-500,-618){\psvect(34)[flip]{31}}
+\rput[br]( 500,-618){\psvect(34)[flip,mirror]{31}}
+\end{pspicture}
+}}
+
+% Set up two tickets
+\begin{document}
+\centering
+\def\article{des}\def\titre{Me{\ph}{\is}to Vals{\eS}}
+\def\simpletitre{des Mephisto Valses}
+\def\manoir{M ---} % Omitted real name
+\drawticket
+\vfil\break
+\def\article{de la}\def\titre{Surp{\ri}se d'{\L}}
+\def\simpletitre{de la Surprise d'L}
+\def\manoir{B ---} % Omitted real name
+\drawticket
+\end{document}
+
+% #################################################################### THE END #
